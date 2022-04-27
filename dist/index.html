@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Library</title>
+  <script defer src="bundle.js"></script></head>
+  <body>
+    <main>
+      <!-- SEARCH BAR -->
+      <div class="container">
+        <h1>What's Your Favourite Book Category?</h1>
+        <form class="search-bar">
+          <input type="text" class="search__field" autofocus />
+          <button class="search__btn">
+            <ion-icon name="search" class="lens-icon"></ion-icon>
+          </button>
+        </form>
+
+        <!-- PAGINATION -->
+        <ul class="books-container hidden"></ul>
+      </div>
+    </main>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

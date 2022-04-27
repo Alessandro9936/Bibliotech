@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --general-border: 10rem;
+
+  --main-color: white;
+  --text-color: rgb(49, 49, 49, 0.6);
+  --buttons-color: #0989ff;
+
+  --font-montserrat: "Montserrat", sans-serif;
+
+  --button-shadow: 0 0 1rem rgb(9, 137, 255, 0.8);
+}
+
+html {
+  font-size: 62.5%; /*Set default font size 10px*/
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap")
+    format("ttf");
+}
+
+body {
+  font-family: var(--font-montserrat);
+  letter-spacing: 0.5px;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+main {
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(45deg, rgb(9, 137, 255, 0.3), var(--main-color));
+  color: var(--text-color);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 4rem;
+  color: var(--buttons-color);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: rgb(255, 87, 25);
+}
+
+img {
+  height: 100%;
+  width: 100%;
+
+  border-radius: 1rem;
+}
+
+ul {
+  list-style: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.container {
+  width: 45rem;
+}
+
+/*Hide srollbars but keep active scrolling functionality*/
+::-webkit-scrollbar {
+  display: none; /*Chrome, Safari, Opera*/
+}
+
+.books-container,
+.scroll {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+/*******************************************************/
