@@ -39,9 +39,6 @@ export const handleView = (() => {
     `;
 
     li.insertAdjacentHTML("beforeend", bookPreviewContent);
-    li.addEventListener("click", () =>
-      console.log(`you clicked book ${index}`)
-    );
     return li;
   }
 

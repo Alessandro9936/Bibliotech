@@ -18,4 +18,15 @@ const init = (() => {
       console.error(err);
     }
   });
+
+  window.addEventListener("click", async (e) => {
+    if (
+      e.target.classList.contains("learn__more") ||
+      e.target.classList.contains("chevron-down")
+    ) {
+      const bookInList = e.target.closest("li").dataset.numBook;
+      const { clickedBook, bookDescription } =
+        await dataHandler.getBookDescription(bookInList);
+    }
+  });
 })();

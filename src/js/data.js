@@ -32,7 +32,20 @@ export const dataHandler = (() => {
     return bookArray;
   }
 
+  const getBookDescription = async (bookInList) => {
+    try {
+      const clickedBook = books.at(bookInList);
+      const response = await axios.get(
+        `https://openlibrary.org${clickedBook.key}.json`
+      );
+      const bookDescription =
+        response.data.description.value ?? response.data.description;
+      return { clickedBook, bookDescription };
+    } catch (err) {}
+  };
+
   return {
     getBooksByCategory,
+    getBookDescription,
   };
 })();
