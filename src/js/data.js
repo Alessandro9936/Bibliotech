@@ -23,6 +23,7 @@ export const dataHandler = (() => {
     );
     const { works: rawBooks } = response.data;
     books = _formatBooks(rawBooks);
+    console.log(books);
     return books;
   };
 

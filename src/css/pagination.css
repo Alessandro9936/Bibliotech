@@ -68,6 +68,8 @@
   border-radius: 2rem;
 
   margin-bottom: 5rem;
+
+  cursor: pointer;
 }
 
 .book__info {
