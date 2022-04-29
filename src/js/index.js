@@ -13,6 +13,7 @@ const init = (() => {
 
   searchCategoryBtn.addEventListener("click", async () => {
     try {
+      handleView.displaySpinner();
       const category = document.getElementById("category").value;
       const booksArray = await dataHandler.getBooksByCategory(category);
       handleView.handleBookPreviews(booksArray);

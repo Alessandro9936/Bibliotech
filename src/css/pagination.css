@@ -3,6 +3,8 @@
 }
 
 .books-container {
+  position: relative;
+
   background-color: var(--main-color);
 
   height: 60rem;
@@ -15,29 +17,6 @@
 
   padding: 10rem 2rem 2rem 2rem;
 }
-
-/*Display rotating spinner while waiting for results*/
-.spinner {
-  margin: 5rem auto;
-  text-align: center;
-}
-
-.spinner-style {
-  height: 4rem;
-  width: 4rem;
-  color: var(--buttons-color);
-  animation: rotate 2s infinite linear;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-/****************************************************/
 
 /*Display error message if can't find category/description*/
 .error {
@@ -61,6 +40,7 @@
 
 .book-preview {
   height: 18rem;
+
   overflow: hidden;
 
   box-shadow: 0 0 2.4rem 0rem rgb(0 0 0 / 5%);
@@ -118,3 +98,30 @@
 
   color: var(--main-color);
 }
+
+/* Spinner */
+
+.loader {
+  position: absolute;
+
+  width: 8rem;
+  height: 8rem;
+  border: 8px solid var(--main-color);
+  border-bottom-color: var(--buttons-color);
+  border-radius: 50%;
+
+  margin-top: 3rem;
+  left: 43%;
+
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/****************************************************/
