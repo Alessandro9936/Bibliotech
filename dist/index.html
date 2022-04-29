@@ -27,6 +27,31 @@
         <!-- PAGINATION -->
         <ul class="books-container hidden"></ul>
       </div>
+      <div class="book-container hidden">
+        <div class="modal">
+          <button class="close-modal">&times;</button>
+          <div class="book__presentation">
+            <div class="book__presentation--image">
+              <img />
+            </div>
+          </div>
+          <ul class="book__description">
+            <li>
+              <strong>Title</strong>:
+              <p data-title></p>
+            </li>
+            <li>
+              <strong>Author</strong>:
+              <p data-author></p>
+            </li>
+            <li class="scroll">
+              <strong>Description</strong>:
+              <p data-description></p>
+            </li>
+          </ul>
+        </div>
+        <div class="overlay"></div>
+      </div>
     </main>
     <script
       type="module"

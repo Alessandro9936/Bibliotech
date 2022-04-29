@@ -27,6 +27,7 @@ const init = (() => {
       const bookInList = e.target.closest("li").dataset.numBook;
       const { clickedBook, bookDescription } =
         await dataHandler.getBookDescription(bookInList);
+      handleView.handleBookDisplay(clickedBook, bookDescription);
     }
   });
 })();

@@ -1,17 +1,22 @@
 export const handleView = (() => {
   const bookPreviewsCont = document.querySelector(".books-container");
+  const bookSpecificsCont = document.querySelector(".book-container");
+  const bookCover = document.querySelector(".book__presentation--image img");
+  const bookTitle = document.querySelector("[data-title]");
+  const bookAuthor = document.querySelector("[data-author]");
+  const bookDescription = document.querySelector("[data-description]");
 
-  function _displayContainer() {
+  function _displayPreviewsContainer() {
     bookPreviewsCont.classList.remove("hidden");
     bookPreviewsCont.innerHTML = "";
   }
 
   const handleBookPreviews = (books) => {
-    _displayContainer();
-    _displayBooksPreviews(books);
+    _displayPreviewsContainer();
+    _displayBookPreviews(books);
   };
 
-  function _displayBooksPreviews(books) {
+  function _displayBookPreviews(books) {
     books.forEach((book, index) => {
       const currBook = _generateMarkup(book, index);
       bookPreviewsCont.appendChild(currBook);
@@ -42,7 +47,24 @@ export const handleView = (() => {
     return li;
   }
 
+  function _toggleBookContainer() {
+    bookSpecificsCont.classList.toggle("hidden");
+  }
+
+  const handleBookDisplay = (book, description) => {
+    _toggleBookContainer();
+    _displayBooksSpecifics(book, description);
+  };
+
+  function _displayBooksSpecifics(book, description) {
+    bookCover.src = `https://covers.openlibrary.org/b/id/${book.cover}-M.jpg`;
+    bookTitle.textContent = `${book.title}`;
+    bookAuthor.textContent = `${book.author}`;
+    bookDescription.textContent = description;
+  }
+
   return {
     handleBookPreviews,
+    handleBookDisplay,
   };
 })();
