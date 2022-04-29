@@ -17,28 +17,28 @@ const init = (() => {
       const category = document.getElementById("category").value.toLowerCase();
       const booksArray = await dataHandler.getBooksByCategory(category);
 
-      // booksArray can contain both the array of books (if the promise was
-      // fulfilled) or the error (if the promise was rejected). For this
-      // reason if the promise returned an error message it will be stored in the
-      // booksArray (as a string and not an object).
-
-      if (typeof booksArray !== "object") throw new Error(booksArray);
+      // error comes from the thrown error based on condition from dataHandler
+      if (typeof booksArray !== "object") throw error;
 
       handleView.handleBookPreviews(booksArray);
-    } catch (err) {
-      handleView.displayErrorMessage(err.message);
+    } catch (error) {
+      handleView.displayErrorMessage(error.message);
     }
   });
 
   window.addEventListener("click", async (e) => {
-    if (
-      e.target.classList.contains("learn__more") ||
-      e.target.classList.contains("chevron-down")
-    ) {
-      const bookInList = e.target.closest("li").dataset.numBook;
-      const { clickedBook, bookDescription } =
-        await dataHandler.getBookDescription(bookInList);
-      handleView.handleBookDisplay(clickedBook, bookDescription);
+    try {
+      if (
+        e.target.classList.contains("learn__more") ||
+        e.target.classList.contains("chevron-down")
+      ) {
+        const bookInList = e.target.closest("li").dataset.numBook;
+        const { clickedBook, bookDescription } =
+          await dataHandler.getBookDescription(bookInList);
+        handleView.handleBookDisplay(clickedBook, bookDescription);
+      }
+    } catch (error) {
+      handleView.displayDesErrMessage(e, error);
     }
   });
 

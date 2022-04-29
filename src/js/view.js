@@ -21,6 +21,14 @@ export const handleView = (() => {
     bookPreviewsCont.appendChild(errorMessage);
   };
 
+  const displayDesErrMessage = (e, message) => {
+    const book = e.target.closest("li");
+    const noDescErr = document.createElement("p");
+    noDescErr.classList.add("description-err");
+    noDescErr.textContent = message;
+    book.prepend(noDescErr);
+  };
+
   function _cleanPreviewsContainer() {
     bookPreviewsCont.innerHTML = "";
   }
@@ -80,6 +88,7 @@ export const handleView = (() => {
   return {
     displayErrorMessage,
     displaySpinner,
+    displayDesErrMessage,
     toggleBookContainer,
     handleBookPreviews,
     handleBookDisplay,
