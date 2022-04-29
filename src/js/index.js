@@ -8,6 +8,8 @@ import { handleView } from "./view";
 
 const init = (() => {
   const searchCategoryBtn = document.querySelector(".search__btn");
+  const hideBookContBtn = document.querySelector(".close-modal");
+  const hideOverlay = document.querySelector(".overlay");
 
   searchCategoryBtn.addEventListener("click", async () => {
     try {
@@ -30,4 +32,8 @@ const init = (() => {
       handleView.handleBookDisplay(clickedBook, bookDescription);
     }
   });
+
+  [hideBookContBtn, hideOverlay].forEach((el) =>
+    el.addEventListener("click", () => handleView.toggleBookContainer())
+  );
 })();

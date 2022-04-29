@@ -6,13 +6,13 @@ export const handleView = (() => {
   const bookAuthor = document.querySelector("[data-author]");
   const bookDescription = document.querySelector("[data-description]");
 
-  function _displayPreviewsContainer() {
+  const displayPreviewsContainer = () => {
     bookPreviewsCont.classList.remove("hidden");
     bookPreviewsCont.innerHTML = "";
-  }
+  };
 
   const handleBookPreviews = (books) => {
-    _displayPreviewsContainer();
+    displayPreviewsContainer();
     _displayBookPreviews(books);
   };
 
@@ -47,12 +47,12 @@ export const handleView = (() => {
     return li;
   }
 
-  function _toggleBookContainer() {
+  const toggleBookContainer = () => {
     bookSpecificsCont.classList.toggle("hidden");
-  }
+  };
 
   const handleBookDisplay = (book, description) => {
-    _toggleBookContainer();
+    toggleBookContainer();
     _displayBooksSpecifics(book, description);
   };
 
@@ -64,6 +64,8 @@ export const handleView = (() => {
   }
 
   return {
+    displayPreviewsContainer,
+    toggleBookContainer,
     handleBookPreviews,
     handleBookDisplay,
   };
