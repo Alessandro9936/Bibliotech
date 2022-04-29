@@ -18,13 +18,29 @@ export const dataHandler = (() => {
   let books;
 
   const getBooksByCategory = async (category) => {
-    const response = await axios.get(
-      `https://openlibrary.org/subjects/${category}.json`
-    );
-    const { works: rawBooks } = response.data;
-    books = _formatBooks(rawBooks);
-    console.log(books);
-    return books;
+    try {
+      const response = await axios.get(
+        `https://openlibrary.org/subjects/${category}.json`,
+        { timeout: 3000 }
+      );
+      const { works: rawBooks } = response.data;
+
+      if (!rawBooks.length) throw error;
+
+      books = _formatBooks(rawBooks);
+      return books;
+    } catch (error) {
+      if (error.response) {
+        //response status is an error code, input field not filled
+        return "Input field can't be empty, please search for a category";
+      } else if (error.request) {
+        //response not received though the request was sent, timeout exceeded
+        return `${error.message}, your internet may be too slow`;
+      } else {
+        //an error occurred when setting up the request, searched category does not exists
+        return `"${category}" category does not exist`;
+      }
+    }
   };
 
   function _formatBooks(rawBooks) {

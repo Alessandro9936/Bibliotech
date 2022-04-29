@@ -14,11 +14,19 @@ const init = (() => {
   searchCategoryBtn.addEventListener("click", async () => {
     try {
       handleView.displaySpinner();
-      const category = document.getElementById("category").value;
+      const category = document.getElementById("category").value.toLowerCase();
       const booksArray = await dataHandler.getBooksByCategory(category);
+
+      // booksArray can contain both the array of books (if the promise was
+      // fulfilled) or the error (if the promise was rejected). For this
+      // reason if the promise returned an error message it will be stored in the
+      // booksArray (as a string and not an object).
+
+      if (typeof booksArray !== "object") throw new Error(booksArray);
+
       handleView.handleBookPreviews(booksArray);
     } catch (err) {
-      console.error(err);
+      handleView.displayErrorMessage(err.message);
     }
   });
 

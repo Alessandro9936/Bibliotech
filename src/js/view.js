@@ -13,23 +13,31 @@ export const handleView = (() => {
     bookPreviewsCont.appendChild(spinner);
   };
 
-  const cleanPreviewsContainer = () => {
-    bookPreviewsCont.innerHTML = "";
+  const displayErrorMessage = (message) => {
+    _cleanPreviewsContainer();
+    const errorMessage = document.createElement("p");
+    errorMessage.classList.add("error");
+    errorMessage.textContent = message;
+    bookPreviewsCont.appendChild(errorMessage);
   };
 
+  function _cleanPreviewsContainer() {
+    bookPreviewsCont.innerHTML = "";
+  }
+
   const handleBookPreviews = (books) => {
-    cleanPreviewsContainer();
+    _cleanPreviewsContainer();
     _displayBookPreviews(books);
   };
 
   function _displayBookPreviews(books) {
     books.forEach((book, index) => {
-      const currBook = _generateMarkup(book, index);
+      const currBook = _generateMarkupPreview(book, index);
       bookPreviewsCont.appendChild(currBook);
     });
   }
 
-  function _generateMarkup(book, index) {
+  function _generateMarkupPreview(book, index) {
     const li = document.createElement("li");
     li.classList.add("book-preview");
     li.dataset.numBook = index;
@@ -70,8 +78,8 @@ export const handleView = (() => {
   }
 
   return {
+    displayErrorMessage,
     displaySpinner,
-    cleanPreviewsContainer,
     toggleBookContainer,
     handleBookPreviews,
     handleBookDisplay,
