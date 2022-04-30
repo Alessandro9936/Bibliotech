@@ -51,19 +51,19 @@ export const handleView = (() => {
     li.dataset.numBook = index;
 
     const bookPreviewContent = `
-    <div class="book__info">
-      <div class="book__info--image">
-        <img src="https://covers.openlibrary.org/b/id/${book.cover}-M.jpg" />
+      <div class="book__info">
+        <div class="book__info--image">
+          <img src="https://covers.openlibrary.org/b/id/${book.cover}-M.jpg" />
+        </div>
+        <ul class="book__info--about">
+          <li><strong>Title</strong>: ${book.title}</li>
+          <li><strong>Author</strong>: ${book.author}</li>
+        </ul>
       </div>
-      <ul class="book__info--about">
-        <li><strong>Title</strong>: ${book.title}</li>
-        <li><strong>Author</strong>: ${book.author}</li>
-      </ul>
-    </div>
-    <div class="learn__more">
-      <ion-icon name="chevron-down-outline" class="chevron-down"></ion-icon>
-    </div>
-    `;
+      <div class="learn__more">
+        <ion-icon name="chevron-down-outline" class="chevron-down"></ion-icon>
+      </div>
+      `;
 
     li.insertAdjacentHTML("beforeend", bookPreviewContent);
     return li;
