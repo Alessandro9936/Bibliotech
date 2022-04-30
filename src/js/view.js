@@ -13,6 +13,16 @@ export const handleView = (() => {
     bookPreviewsCont.appendChild(spinner);
   };
 
+  const toggleBookContainer = () => {
+    bookSpecificsCont.classList.toggle("hidden");
+  };
+
+  function _cleanPreviewsContainer() {
+    bookPreviewsCont.innerHTML = "";
+  }
+
+  // Display Errors
+
   const displayErrorMessage = (message) => {
     _cleanPreviewsContainer();
     const errorMessage = document.createElement("p");
@@ -29,9 +39,7 @@ export const handleView = (() => {
     book.prepend(noDescErr);
   };
 
-  function _cleanPreviewsContainer() {
-    bookPreviewsCont.innerHTML = "";
-  }
+  // Display books by category
 
   const handleBookPreviews = (books) => {
     _cleanPreviewsContainer();
@@ -48,6 +56,8 @@ export const handleView = (() => {
   function _generateMarkupPreview(book, index) {
     const li = document.createElement("li");
     li.classList.add("book-preview");
+    // Set attribute numBook = index because we will need it later when
+    // we have to retrieve the description of the clicked book
     li.dataset.numBook = index;
 
     const bookPreviewContent = `
@@ -69,9 +79,7 @@ export const handleView = (() => {
     return li;
   }
 
-  const toggleBookContainer = () => {
-    bookSpecificsCont.classList.toggle("hidden");
-  };
+  // Display books description
 
   const handleBookDisplay = (book, description) => {
     toggleBookContainer();
@@ -86,11 +94,11 @@ export const handleView = (() => {
   }
 
   return {
-    displayErrorMessage,
     displaySpinner,
-    displayDesErrMessage,
-    toggleBookContainer,
     handleBookPreviews,
+    displayErrorMessage,
+    toggleBookContainer,
     handleBookDisplay,
+    displayDesErrMessage,
   };
 })();

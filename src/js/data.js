@@ -1,5 +1,6 @@
 import "regenerator-runtime/runtime";
 import axios from "axios";
+import _ from "lodash";
 
 const formattedBook = (rawBook) => {
   const title = rawBook.title;
@@ -24,23 +25,24 @@ export const dataHandler = (() => {
         `https://openlibrary.org/subjects/${category}.json`,
         { timeout: 5000 }
       );
-      const { works: rawBooks } = response.data;
 
-      if (!rawBooks.length) throw error;
+      const rawBooks = _.get(response, "data.works", []);
+
+      if (_.isEmpty(rawBooks)) throw error;
 
       books = _formatBooks(rawBooks);
       return books;
     } catch (error) {
       if (error.response) {
-        //response status is an error code, input field not filled
+        //response status is an error code (input field not filled)
         throw new Error(
           "Input field can't be empty, please search for a category"
         );
       } else if (error.request) {
-        //response not received though the request was sent, timeout exceeded
+        //response not received though the request was sent (timeout exceeded)
         throw new Error(`${error.message}, your internet may be too slow`);
       } else {
-        //an error occurred when setting up the request, searched category does not exists
+        //an error occurred when setting up the request (searched category does not exist)s
         throw new Error(`"${category}" category does not exist`);
       }
     }
@@ -54,16 +56,23 @@ export const dataHandler = (() => {
   const getBookDescription = async (bookInList) => {
     try {
       const clickedBook = books.at(bookInList);
+
       const response = await axios.get(
         `https://openlibrary.org${clickedBook.key}.json`
       );
 
-      if (!response.data.hasOwnProperty("description")) {
+      //There are books that do not have description available
+      if (!_.has(response.data, "description")) {
         throw new Error("No description available");
       }
 
+      //There are books where the description is stored inside another object
+      //with the property 'value'
       const bookDescription =
         response.data.description.value ?? response.data.description;
+
+      //We need to also return the clicked book in order to be able to append
+      //the error message to the right book which has no description
       return { clickedBook, bookDescription };
     } catch (error) {
       throw error.message;

@@ -17,7 +17,7 @@ const init = (() => {
       const category = document.getElementById("category").value.toLowerCase();
       const booksArray = await dataHandler.getBooksByCategory(category);
 
-      // error comes from the thrown error based on condition from dataHandler
+      // error comes from the thrown error based on condition from dataHandler - If value of booksArray is not array return the error
       if (typeof booksArray !== "object") throw error;
 
       handleView.handleBookPreviews(booksArray);
@@ -32,9 +32,9 @@ const init = (() => {
         e.target.classList.contains("learn__more") ||
         e.target.classList.contains("chevron-down")
       ) {
-        const bookInList = e.target.closest("li").dataset.numBook;
+        const bookInArray = e.target.closest("li").dataset.numBook;
         const { clickedBook, bookDescription } =
-          await dataHandler.getBookDescription(bookInList);
+          await dataHandler.getBookDescription(bookInArray);
         handleView.handleBookDisplay(clickedBook, bookDescription);
       }
     } catch (error) {
