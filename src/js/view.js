@@ -31,8 +31,8 @@ export const handleView = (() => {
     bookPreviewsCont.appendChild(errorMessage);
   };
 
-  const displayDesErrMessage = (e, message) => {
-    const book = e.target.closest("li");
+  const displayDesErrMessage = (target, message) => {
+    const book = target.closest("li");
     const noDescErr = document.createElement("p");
     noDescErr.classList.add("description-err");
     noDescErr.textContent = message;

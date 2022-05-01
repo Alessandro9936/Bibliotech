@@ -22,7 +22,7 @@ export const dataHandler = (() => {
   const getBooksByCategory = async (category) => {
     try {
       const response = await axios.get(
-        `https://openlibrary.org/subjects/${category}.json`,
+        `${process.env.BOOK_API_CATEGORY}${category}.json`,
         { timeout: 5000 }
       );
 
@@ -58,7 +58,7 @@ export const dataHandler = (() => {
       const clickedBook = books.at(bookInList);
 
       const response = await axios.get(
-        `https://openlibrary.org${clickedBook.key}.json`
+        `${process.env.BOOK_API_DESCRIPTION}${clickedBook.key}.json`
       );
 
       //There are books that do not have description available

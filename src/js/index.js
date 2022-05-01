@@ -11,7 +11,32 @@ const init = (() => {
   const hideBookContBtn = document.querySelector(".close-modal");
   const hideOverlay = document.querySelector(".overlay");
 
-  searchCategoryBtn.addEventListener("click", async () => {
+  // Call bookByCategory when use click on search button or click enter
+  searchCategoryBtn.addEventListener("click", bookByCategory);
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      bookByCategory();
+    }
+  });
+
+  // Each book previews has a button, if the user clicks on it bookDescription is called
+  window.addEventListener("click", (e) => {
+    const target = e.target;
+    if (
+      target.classList.contains("learn__more") ||
+      target.classList.contains("chevron-down")
+    ) {
+      bookDescription(target);
+    }
+  });
+
+  [hideBookContBtn, hideOverlay].forEach((el) =>
+    el.addEventListener("click", () => handleView.toggleBookContainer())
+  );
+
+  // Get all books of category
+  async function bookByCategory() {
     try {
       handleView.displaySpinner();
       const category = document.getElementById("category").value.toLowerCase();
@@ -24,25 +49,17 @@ const init = (() => {
     } catch (error) {
       handleView.displayErrorMessage(error.message);
     }
-  });
+  }
 
-  window.addEventListener("click", async (e) => {
+  // Get description of clicked book
+  async function bookDescription(target) {
     try {
-      if (
-        e.target.classList.contains("learn__more") ||
-        e.target.classList.contains("chevron-down")
-      ) {
-        const bookInArray = e.target.closest("li").dataset.numBook;
-        const { clickedBook, bookDescription } =
-          await dataHandler.getBookDescription(bookInArray);
-        handleView.handleBookDisplay(clickedBook, bookDescription);
-      }
+      const bookInArray = target.closest("li").dataset.numBook;
+      const { clickedBook, bookDescription } =
+        await dataHandler.getBookDescription(bookInArray);
+      handleView.handleBookDisplay(clickedBook, bookDescription);
     } catch (error) {
-      handleView.displayDesErrMessage(e, error);
+      handleView.displayDesErrMessage(target, error);
     }
-  });
-
-  [hideBookContBtn, hideOverlay].forEach((el) =>
-    el.addEventListener("click", () => handleView.toggleBookContainer())
-  );
+  }
 })();
