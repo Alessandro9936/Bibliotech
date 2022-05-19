@@ -31,7 +31,7 @@ export const handleView = (() => {
     bookPreviewsCont.appendChild(errorMessage);
   };
 
-  const displayDesErrMessage = (target, message) => {
+  const displayDescriptionErrorMessage = (target, message) => {
     const book = target.closest("li");
     const noDescErr = document.createElement("p");
     noDescErr.classList.add("description-err");
@@ -56,8 +56,6 @@ export const handleView = (() => {
   function _generateMarkupPreview(book, index) {
     const li = document.createElement("li");
     li.classList.add("book-preview");
-    // Set attribute numBook = index because we will need it later when
-    // we have to retrieve the description of the clicked book
     li.dataset.numBook = index;
 
     const bookPreviewContent = `
@@ -99,6 +97,6 @@ export const handleView = (() => {
     displayErrorMessage,
     toggleBookContainer,
     handleBookDisplay,
-    displayDesErrMessage,
+    displayDescriptionErrorMessage,
   };
 })();

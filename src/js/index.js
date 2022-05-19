@@ -20,7 +20,7 @@ const init = (() => {
     }
   });
 
-  // Each book previews has a button, if the user clicks on it bookDescription is called
+  // Each book previews has a button to show its specifics, if the user clicks on it bookDescription is called
   window.addEventListener("click", (e) => {
     const target = e.target;
     if (
@@ -31,6 +31,7 @@ const init = (() => {
     }
   });
 
+  // Close book specifics
   [hideBookContBtn, hideOverlay].forEach((el) =>
     el.addEventListener("click", () => handleView.toggleBookContainer())
   );
@@ -42,7 +43,7 @@ const init = (() => {
       const category = document.getElementById("category").value.toLowerCase();
       const booksArray = await dataHandler.getBooksByCategory(category);
 
-      // error comes from the thrown error based on condition from dataHandler - If value of booksArray is not array return the error
+      // error comes from dataHandler - If value of booksArray is not array return the error
       if (typeof booksArray !== "object") throw error;
 
       handleView.handleBookPreviews(booksArray);
@@ -54,6 +55,7 @@ const init = (() => {
   // Get description of clicked book
   async function bookDescription(target) {
     try {
+      //BookInArray is the clicked book in the preview list
       const bookInArray = target.closest("li").dataset.numBook;
       const { clickedBook, bookDescription } =
         await dataHandler.getBookDescription(bookInArray);

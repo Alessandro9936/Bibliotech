@@ -71,8 +71,6 @@ export const dataHandler = (() => {
       const bookDescription =
         response.data.description.value ?? response.data.description;
 
-      //We need to also return the clicked book in order to be able to append
-      //the error message to the right book which has no description
       return { clickedBook, bookDescription };
     } catch (error) {
       throw error.message;
