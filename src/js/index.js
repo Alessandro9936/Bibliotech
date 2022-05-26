@@ -61,7 +61,7 @@ const init = (() => {
         await dataHandler.getBookDescription(bookInArray);
       handleView.handleBookDisplay(clickedBook, bookDescription);
     } catch (error) {
-      handleView.displayDesErrMessage(target, error);
+      handleView.displayDescriptionErrorMessage(target, error);
     }
   }
 })();
