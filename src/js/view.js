@@ -6,13 +6,6 @@ export const handleView = (() => {
   const bookAuthor = document.querySelector("[data-author]");
   const bookDescription = document.querySelector("[data-description]");
 
-  const displaySpinner = () => {
-    bookPreviewsCont.classList.remove("hidden");
-    const spinner = document.createElement("span");
-    spinner.classList.add("loader");
-    bookPreviewsCont.appendChild(spinner);
-  };
-
   const toggleBookContainer = () => {
     bookSpecificsCont.classList.toggle("hidden");
   };
@@ -20,6 +13,14 @@ export const handleView = (() => {
   function _cleanPreviewsContainer() {
     bookPreviewsCont.innerHTML = "";
   }
+
+  const displaySpinner = () => {
+    _cleanPreviewsContainer();
+    bookPreviewsCont.classList.remove("hidden");
+    const spinner = document.createElement("span");
+    spinner.classList.add("loader");
+    bookPreviewsCont.appendChild(spinner);
+  };
 
   // Display Errors
 
@@ -33,9 +34,14 @@ export const handleView = (() => {
 
   const displayDescriptionErrorMessage = (target, message) => {
     const book = target.closest("li");
+
+    //If error is already displayed, return
+    if (book.querySelector(".description-err")) return;
+
     const noDescErr = document.createElement("p");
     noDescErr.classList.add("description-err");
     noDescErr.textContent = message;
+
     book.prepend(noDescErr);
   };
 
@@ -48,14 +54,16 @@ export const handleView = (() => {
 
   function _displayBookPreviews(books) {
     books.forEach((book, index) => {
-      const currBook = _generateMarkupPreview(book, index);
-      bookPreviewsCont.appendChild(currBook);
+      const currentBook = _generateMarkupPreview(book, index);
+      bookPreviewsCont.appendChild(currentBook);
     });
   }
 
   function _generateMarkupPreview(book, index) {
     const li = document.createElement("li");
     li.classList.add("book-preview");
+
+    //We need the book number in the array of book previews to find its description later
     li.dataset.numBook = index;
 
     const bookPreviewContent = `
@@ -79,15 +87,15 @@ export const handleView = (() => {
 
   // Display books description
 
-  const handleBookDisplay = (book, description) => {
+  const handleBookDisplay = (bookData, description) => {
     toggleBookContainer();
-    _displayBooksSpecifics(book, description);
+    _displayBooksSpecifics(bookData, description);
   };
 
-  function _displayBooksSpecifics(book, description) {
-    bookCover.src = `https://covers.openlibrary.org/b/id/${book.cover}-M.jpg`;
-    bookTitle.textContent = `${book.title}`;
-    bookAuthor.textContent = `${book.author}`;
+  function _displayBooksSpecifics(bookData, description) {
+    bookCover.src = `https://covers.openlibrary.org/b/id/${bookData.cover}-M.jpg`;
+    bookTitle.textContent = `${bookData.title}`;
+    bookAuthor.textContent = `${bookData.author}`;
     bookDescription.textContent = description;
   }
 

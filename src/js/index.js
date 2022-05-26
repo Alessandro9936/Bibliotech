@@ -11,7 +11,7 @@ const init = (() => {
   const hideBookContBtn = document.querySelector(".close-modal");
   const hideOverlay = document.querySelector(".overlay");
 
-  // Call bookByCategory when use click on search button or click enter
+  // Get books by category when user click on search button or click enter
   searchCategoryBtn.addEventListener("click", bookByCategory);
   window.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
@@ -20,7 +20,7 @@ const init = (() => {
     }
   });
 
-  // Each book previews has a button to show its specifics, if the user clicks on it bookDescription is called
+  // Each book previews has a button to show its specifics (with an event listener attached), if the user clicks on it bookDescription is called
   window.addEventListener("click", (e) => {
     const target = e.target;
     if (
@@ -31,7 +31,7 @@ const init = (() => {
     }
   });
 
-  // Close book specifics
+  // Close book specifics modal
   [hideBookContBtn, hideOverlay].forEach((el) =>
     el.addEventListener("click", () => handleView.toggleBookContainer())
   );
@@ -41,27 +41,27 @@ const init = (() => {
     try {
       handleView.displaySpinner();
       const category = document.getElementById("category").value.toLowerCase();
-      const booksArray = await dataHandler.getBooksByCategory(category);
+      const booksByCategory = await dataHandler.getBooksByCategory(category);
 
       // error comes from dataHandler - If value of booksArray is not array return the error
-      if (typeof booksArray !== "object") throw error;
+      if (!Array.isArray(booksByCategory)) throw error;
 
-      handleView.handleBookPreviews(booksArray);
+      handleView.handleBookPreviews(booksByCategory);
     } catch (error) {
       handleView.displayErrorMessage(error.message);
     }
   }
 
   // Get description of clicked book
-  async function bookDescription(target) {
+  async function bookDescription(bookTarget) {
     try {
-      //BookInArray is the clicked book in the preview list
-      const bookInArray = target.closest("li").dataset.numBook;
-      const { clickedBook, bookDescription } =
+      //BookInArray is the clicked book in the preview list, we just need its number in the list
+      const bookInArray = bookTarget.closest("li").dataset.numBook;
+      const { clickedBookData, bookDescription } =
         await dataHandler.getBookDescription(bookInArray);
-      handleView.handleBookDisplay(clickedBook, bookDescription);
+      handleView.handleBookDisplay(clickedBookData, bookDescription);
     } catch (error) {
-      handleView.displayDescriptionErrorMessage(target, error);
+      handleView.displayDescriptionErrorMessage(bookTarget, error);
     }
   }
 })();

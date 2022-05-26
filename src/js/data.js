@@ -26,15 +26,16 @@ export const dataHandler = (() => {
         { timeout: 5000 }
       );
 
-      const rawBooks = _.get(response, "data.works", []);
+      const rawBooksData = _.get(response, "data.works", []);
 
-      if (_.isEmpty(rawBooks)) throw error;
+      // Check if requested caterogy exist
+      if (_.isEmpty(rawBooksData)) throw error;
 
-      books = _formatBooks(rawBooks);
+      books = _formatBooks(rawBooksData);
       return books;
     } catch (error) {
       if (error.response) {
-        //response status is an error code (input field not filled)
+        //response status is an error code (input field empty)
         throw new Error(
           "Input field can't be empty, please search for a category"
         );
@@ -42,23 +43,23 @@ export const dataHandler = (() => {
         //response not received though the request was sent (timeout exceeded)
         throw new Error(`${error.message}, your internet may be too slow`);
       } else {
-        //an error occurred when setting up the request (searched category does not exist)s
+        //an error occurred in the request (searched category does not exist)
         throw new Error(`"${category}" category does not exist`);
       }
     }
   };
 
   function _formatBooks(rawBooks) {
-    const bookArray = rawBooks.map((rawBook) => formattedBook(rawBook));
-    return bookArray;
+    const booksArray = rawBooks.map((rawBook) => formattedBook(rawBook));
+    return booksArray;
   }
 
   const getBookDescription = async (bookInList) => {
     try {
-      const clickedBook = books.at(bookInList);
+      const clickedBookData = books.at(bookInList);
 
       const response = await axios.get(
-        `${process.env.BOOK_API_DESCRIPTION}${clickedBook.key}.json`
+        `${process.env.BOOK_API_DESCRIPTION}${clickedBookData.key}.json`
       );
 
       //There are books that do not have description available
@@ -66,12 +67,11 @@ export const dataHandler = (() => {
         throw new Error("No description available");
       }
 
-      //There are books where the description is stored inside another object
-      //with the property 'value'
+      //There are books where the description is nested inside another object with the property 'value'
       const bookDescription =
         response.data.description.value ?? response.data.description;
 
-      return { clickedBook, bookDescription };
+      return { clickedBookData, bookDescription };
     } catch (error) {
       throw error.message;
     }
