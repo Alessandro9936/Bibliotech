@@ -4,7 +4,7 @@
 
   top: 50%;
   left: 50%;
-  width: 90rem;
+  width: clamp(60rem, 50%, 90rem);
   height: 70rem;
 
   transform: translate(-50%, -50%);
