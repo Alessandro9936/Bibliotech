@@ -18,7 +18,7 @@ This library application allow users to search books by category. Around twelve 
 1. Clone the repo
 
 ```bash
-  git clone https://github.com/Alessandro9936/Weather_App.git
+  git@github.com:Alessandro9936/Library_application.git
 ```
 
 2. Install NPM packages
