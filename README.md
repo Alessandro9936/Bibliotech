@@ -35,23 +35,23 @@ This library application allow users to search books by category. Around twelve 
   GET https://openlibrary.org/subjects/${category}.json
 ```
 
-| Parameter  | Type     | Description                 |
-| :--------- | :------- | :-------------------------- |
-| `category` | `string` | **Required**. Book category |
+| Parameter  | Type     | Description                               |
+| :--------- | :------- | :---------------------------------------- |
+| `category` | `string` | **Required**. Book category (ex. fantasy) |
 
-#### Get item
+#### Get book description
 
 ```http
-  GET https://openlibrary.org${key}.json
+  GET https://openlibrary.org${book.key}.json
 ```
 
-| Parameter | Type     | Description            |
-| :-------- | :------- | :--------------------- |
-| `key`     | `string` | **Required**. Book key |
+| Parameter  | Type     | Description                                  |
+| :--------- | :------- | :------------------------------------------- |
+| `book.key` | `string` | **Required**. Book key (ex. /works/OL85892W) |
 
 ## Environment Variables
 
-In this case environment variables have been used just for project purposes.
+In this case environment variables have been used just for project purposes, there are no private keys or sensible/personal data.
 
 To run this project, you will need to add the following environment variables to your .env file
 
