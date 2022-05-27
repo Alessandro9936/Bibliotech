@@ -4,7 +4,7 @@ import _ from "lodash";
 
 const formattedBook = (rawBook) => {
   const title = rawBook.title;
-  const author = rawBook.authors[0].name;
+  const author = rawBook.authors.map((author) => author.name);
   const cover = rawBook.cover_id;
   const key = rawBook.key;
 

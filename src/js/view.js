@@ -73,7 +73,9 @@ export const handleView = (() => {
         </div>
         <ul class="book__info--about">
           <li><strong>Title</strong>: ${book.title}</li>
-          <li><strong>Author</strong>: ${book.author}</li>
+          <li><strong>Author</strong>: ${book.author.map(
+            (author) => " " + author
+          )}</li>
         </ul>
       </div>
       <div class="learn__more">
@@ -95,7 +97,7 @@ export const handleView = (() => {
   function _displayBooksSpecifics(bookData, description) {
     bookCover.src = `https://covers.openlibrary.org/b/id/${bookData.cover}-M.jpg`;
     bookTitle.textContent = `${bookData.title}`;
-    bookAuthor.textContent = `${bookData.author}`;
+    bookAuthor.textContent = `${bookData.author.map((author) => " " + author)}`;
     bookDescription.textContent = description;
   }
 
