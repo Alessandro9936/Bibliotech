@@ -1,17 +1,24 @@
-# Library Application
+# S2I_Library_Application
+
+This is the final project for the renowned italian learning platform Start2Impact - Javascript Advanced Section
+
+## Demo link
+
+Try library app on this link --> https://alessandrolibrary.netlify.app/
+
+## About the app
 
 This library application allow users to search books by category. Around twelve book previews are displayed for any category. You can also click on each book preview to show his specifics (author, title and description).
 
-## Built With
+## Screenshots
+![Nuova scheda - Google Chrome 2022-08-02 13-15-46 (2)](https://user-images.githubusercontent.com/64644550/183038866-ee690780-413a-4fbc-9561-ddda7dcef828.gif)
+## Technologies
 
-- HTML
-- CSS
-- Javascript
+**HTML** - **CSS** - **JAVASCRIPT** - **APIs**
 
 ### Libraries
 
-- Axios
-- Lodash
+**Axios** - **Lodash**
 
 ## Installation
 
@@ -31,8 +38,8 @@ This library application allow users to search books by category. Around twelve 
 
 #### Get books by category
 
-```http
-  GET https://openlibrary.org/subjects/${category}.json
+```
+  https://openlibrary.org/subjects/${category}.json
 ```
 
 | Parameter  | Type     | Description                               |
@@ -41,8 +48,8 @@ This library application allow users to search books by category. Around twelve 
 
 #### Get book description
 
-```http
-  GET https://openlibrary.org${book.key}.json
+```
+  https://openlibrary.org${book.key}.json
 ```
 
 | Parameter  | Type     | Description                                  |
@@ -58,7 +65,3 @@ To run this project, you will need to add the following environment variables to
 `BOOK_API_CATEGORY=https://openlibrary.org/subjects/`
 
 `BOOK_API_DESCRIPTION=https://openlibrary.org`
-
-## Demo
-
-Live Library Application demo here: https://alessandrolibrary.netlify.app/
