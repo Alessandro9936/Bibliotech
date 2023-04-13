@@ -1,4 +1,4 @@
-# S2I_Library_Application
+# Bibliotech
 
 This is the final project for the renowned italian learning platform Start2Impact - Javascript Advanced Section
 
